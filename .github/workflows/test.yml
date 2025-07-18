@@ -1,0 +1,25 @@
+name: Run MERN Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: |
+          corepack enable
+          pnpm install
+
+      - name: Run Server Tests
+        run: pnpm test:server
+
+      - name: Run Client Tests
+        run: pnpm test:client
